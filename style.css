@@ -1,0 +1,96 @@
+body {
+    background-color: #f5f5f5;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .on {
+    color: black;
+  }
+  
+  .off {
+    color: lightgrey;
+  }
+  
+  .on-off-h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    font-size: 200px;
+  }
+  
+  .btn-start a {
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 50px;
+    font-weight: bold;
+    color: lightgrey;
+    background-color: transparent;
+  }
+  
+  .btn-start a:hover {
+    cursor: pointer;
+    color: black;
+    transition: 0.1s ease-in-out;
+  }
+  
+  .btn-control {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 50px;
+    font-weight: bold;
+    color: lightgrey;
+    background-color: transparent;
+  }
+  
+  .btn-control a {
+    text-decoration: none;
+    color: lightgrey;
+  }
+  
+  .btn-control a:hover {
+    cursor: pointer;
+    color: black;
+    transition: 0.1s ease-in-out;
+  }
+  
+  .btn-back {
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 50px;
+    font-weight: bold;
+    color: lightgrey;
+    background-color: transparent;
+  }
+  
+  .btn-back:hover {
+    cursor: pointer;
+    color: black;
+    transition: 0.1s ease-in-out;
+  }
+  
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
