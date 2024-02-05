@@ -1,68 +1,89 @@
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
-document.body.appendChild(canvas);
+const canvas = document.createElement("canvas"); // rajzolás
+const ctx = canvas.getContext("2d");
+document.body.appendChild(canvas); // megjelenítés
 
 canvas.width = 1900;
 canvas.height = 900;
 
-const characterImage = new Image();
-characterImage.src = 'img/character.png';
-characterImage.addEventListener('error', function() {
-    console.error('Error');
+const characterImage = new Image(); // karakter kép
+characterImage.src = "img/character.png";
+characterImage.addEventListener("error", function () {
+  console.error("Error"); // ha hiba van
 });
 
 const character = {
-    x: 0,
-    y: 0,
-    width: 150,
-    height: 150,
-    jumping: false,
-    jumpHeight: 300,
-    jumpCount: 0,
-    jumpSpeed: 20,
-    fallSpeed: 20,
-    speed: 20,
-    gravity: 0
-};
+  x: 0,
+  y: 0,
+  width: 150,
+  height: 150,
+  jumping: false,
+  jumpHeight: 350,
+  jumpCount: 0,
+  jumpSpeed: 15,
+  fallSpeed: 5,
+  speed: 5,
+  velocityX: 0,
+  gravity: 0.5,
+}; // karakter tulajdonságai
 
-document.addEventListener('keydown', function(event) {
-    switch(event.key) {
-        case 'w':
-            if (!character.jumping && character.y >= canvas.height - character.height) {
-                character.jumping = true;
-                character.jumpCount = 0;
-            }
-            break;
-        case 'a':
-            character.x -= character.speed;
-            break;
-        case 's':
-            character.y += character.speed;
-            break;
-        case 'd':
-            character.x += character.speed;
-            break;
-    }
+const keys = {};
+
+document.addEventListener("keydown", function (event) {
+  keys[event.key] = true; // ha lenyomjuk a gombot
 });
 
-// if the character jumps once, it cannot jump again until it lands
+document.addEventListener("keyup", function (event) {
+  keys[event.key] = false; // ha felengedjük a gombot
+});
+
+function updateCharacter() {
+  if (
+    keys["w"] &&
+    !character.jumping && // ha lenyomjuk a w-t és nem ugrunk (nem a levegőben vagyunk)
+    character.y >= canvas.height - character.height // és a karakter a földön van
+  ) {
+    character.jumping = true; // akkor ugrunk
+    character.jumpCount = 0;
+    character.velocityY = -character.jumpSpeed;
+  }
+
+  if (keys["a"]) {
+    character.velocityX = -character.speed; // balra mozgás
+  } else if (keys["d"]) {
+    character.velocityX = character.speed; // jobbra mozgás
+  } else {
+    character.velocityX = 0; // ha nem nyomjuk a gombot, akkor nem mozog
+  }
+
+  character.x += character.velocityX;
+
+  if (character.jumping) {
+    character.y += character.velocityY; // ha ugrunk, akkor a karakter felfelé mozog
+    character.velocityY += character.gravity;
+
+    character.jumpCount += Math.abs(character.velocityY); // ugrás számláló
+    if (character.jumpCount >= character.jumpHeight) {
+      character.jumping = false; // ha elértük a maximális ugrás magasságot, akkor lefelé kezdünk mozogni
+      character.velocityY = 0;
+    }
+  } else if (character.y < canvas.height - character.height) {
+    character.y += character.fallSpeed; // ha a karakter a levegőben van, akkor lefelé mozog
+  }
+}
 
 function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(characterImage, character.x, character.y, character.width, character.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // képernyő törlése
+  ctx.drawImage(
+    characterImage,
+    character.x,
+    character.y,
+    character.width,
+    character.height
+  ); // karakter rajzolása
 
-    if (character.jumping) {
-        character.y -= character.jumpSpeed;
-        character.jumpCount += character.jumpSpeed;
-        if (character.jumpCount >= character.jumpHeight) {
-            character.jumping = false;
-        }
-    } else if (character.y < canvas.height - character.height) {
-        // Simulate falling down when not jumping
-        character.y += character.fallSpeed;
-    }
+  updateCharacter(); // karakter mozgatása
 
-    requestAnimationFrame(gameLoop);
+  requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
