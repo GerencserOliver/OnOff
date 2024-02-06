@@ -3,10 +3,10 @@ const ctx = canvas.getContext("2d");
 document.body.appendChild(canvas); // megjelenítés
 
 canvas.width = 1900;
-canvas.height = 900;
+canvas.height = 940;
 
 const characterImage = new Image(); // karakter kép
-characterImage.src = "img/character.png";
+characterImage.src = "img/character-jobb.png";
 characterImage.addEventListener("error", function () {
   console.error("Error"); // ha hiba van
 });
@@ -20,7 +20,7 @@ const character = {
   jumpHeight: 350,
   jumpCount: 0,
   jumpSpeed: 15,
-  fallSpeed: 5,
+  fallSpeed: 15,
   speed: 5,
   velocityX: 0,
   gravity: 0.5,
@@ -49,8 +49,10 @@ function updateCharacter() {
 
   if (keys["a"]) {
     character.velocityX = -character.speed; // balra mozgás
+    characterImage.src = "img/character-bal.png"; // karakter képének cseréje
   } else if (keys["d"]) {
     character.velocityX = character.speed; // jobbra mozgás
+    characterImage.src = "img/character-jobb.png"; // karakter képének cseréje
   } else {
     character.velocityX = 0; // ha nem nyomjuk a gombot, akkor nem mozog
   }
