@@ -17,14 +17,30 @@ const character = {
   width: 150,
   height: 150,
   jumping: false,
-  jumpHeight: 350,
+  jumpHeight: 370,
   jumpCount: 0,
-  jumpSpeed: 15,
-  fallSpeed: 15,
-  speed: 5,
+  jumpSpeed: 25,
+  fallSpeed: 25,
+  speed: 12,
   velocityX: 0,
   gravity: 0.5,
+  velocityY: 0,
 }; // karakter tulajdonságai
+
+function collisionDetection() {
+  if (character.x < 0) {
+    character.x = 0; // ha a karakter bal széle kimegy a képernyőről, akkor visszahúzzuk
+  } else if (character.x > canvas.width - character.width) {
+    character.x = canvas.width - character.width; // ha a karakter jobb széle kimegy a képernyőről, akkor visszahúzzuk
+  }
+}
+
+// ne lógjon le a karakter a képernyő aljáról
+function characterOnGround() {
+  if (character.y > canvas.height - character.height) {
+    character.y = canvas.height - character.height;
+  }
+}
 
 const keys = {};
 
@@ -84,6 +100,10 @@ function gameLoop() {
   ); // karakter rajzolása
 
   updateCharacter(); // karakter mozgatása
+
+  collisionDetection(); // ütközés detektálás
+
+  characterOnGround(); // karakter a földön van-e
 
   requestAnimationFrame(gameLoop);
 }
