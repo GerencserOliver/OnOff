@@ -2,8 +2,13 @@ const canvas = document.createElement("canvas"); // rajzolás
 const ctx = canvas.getContext("2d");
 document.body.appendChild(canvas); // megjelenítés
 
-canvas.width = 1900;
-canvas.height = 940;
+canvas.width = window.innerWidth - 20;
+canvas.height = window.innerHeight - 20;
+
+window.addEventListener("resize", function () {
+  canvas.width = window.innerWidth - 20;
+  canvas.height = window.innerHeight - 20;
+});
 
 const characterImage = new Image(); // karakter kép
 characterImage.src = "img/character-jobb.png";
@@ -17,11 +22,11 @@ const character = {
   width: 150,
   height: 150,
   jumping: false,
-  jumpHeight: 370,
+  jumpHeight: 500,
   jumpCount: 0,
-  jumpSpeed: 25,
-  fallSpeed: 25,
-  speed: 12,
+  jumpSpeed: 2000,
+  fallSpeed: 2000,
+  speed: 2000,
   velocityX: 0,
   gravity: 0.5,
   velocityY: 0,
@@ -52,7 +57,13 @@ document.addEventListener("keyup", function (event) {
   keys[event.key] = false; // ha felengedjük a gombot
 });
 
+var lastUpdate = Date.now();
+
 function updateCharacter() {
+  var now = Date.now();
+  var dt = (now - lastUpdate) / 1000;
+  lastUpdate = now;
+
   if (
     keys["w"] &&
     !character.jumping && // ha lenyomjuk a w-t és nem ugrunk (nem a levegőben vagyunk)
@@ -60,14 +71,14 @@ function updateCharacter() {
   ) {
     character.jumping = true; // akkor ugrunk
     character.jumpCount = 0;
-    character.velocityY = -character.jumpSpeed;
+    character.velocityY = -character.jumpSpeed * dt;
   }
 
   if (keys["a"]) {
-    character.velocityX = -character.speed; // balra mozgás
+    character.velocityX = -character.speed * dt; // balra mozgás
     characterImage.src = "img/character-bal.png"; // karakter képének cseréje
   } else if (keys["d"]) {
-    character.velocityX = character.speed; // jobbra mozgás
+    character.velocityX = character.speed * dt; // jobbra mozgás
     characterImage.src = "img/character-jobb.png"; // karakter képének cseréje
   } else {
     character.velocityX = 0; // ha nem nyomjuk a gombot, akkor nem mozog
@@ -85,7 +96,7 @@ function updateCharacter() {
       character.velocityY = 0;
     }
   } else if (character.y < canvas.height - character.height) {
-    character.y += character.fallSpeed; // ha a karakter a levegőben van, akkor lefelé mozog
+    character.y += character.fallSpeed * dt; // ha a karakter a levegőben van, akkor lefelé mozog
   }
 }
 
