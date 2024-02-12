@@ -70,7 +70,8 @@ body {
     transition: 0.1s ease-in-out;
   }
   
-  .btn-back {
+  .btn-back a{
+    text-decoration: none;
     position: absolute;
     left: 50%;
     top: 90%;
@@ -82,7 +83,7 @@ body {
     background-color: transparent;
   }
   
-  .btn-back:hover {
+  .btn-back a:hover {
     cursor: pointer;
     color: black;
     transition: 0.1s ease-in-out;
@@ -94,4 +95,3 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
   }
-  
