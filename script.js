@@ -26,10 +26,12 @@ const character = {
   jumpCount: 0,
   jumpSpeed: 2000,
   fallSpeed: 2000,
-  speed: 2000,
+  speed: 1500,
   velocityX: 0,
   gravity: 0.5,
   velocityY: 0,
+  leftWall: 0, // left wall position
+  rightWall: canvas.width, // right wall position
 }; // karakter tulajdonságai
 
 function collisionDetection() {
@@ -67,7 +69,7 @@ function updateCharacter() {
   if (
     keys["w"] &&
     !character.jumping && // ha lenyomjuk a w-t és nem ugrunk (nem a levegőben vagyunk)
-    character.y >= canvas.height - character.height // és a karakter a földön van
+    (character.y >= canvas.height - character.height || characterStandingOnPlatform()) // és a karakter a földön van vagy a platformon áll
   ) {
     character.jumping = true; // akkor ugrunk
     character.jumpCount = 0;
@@ -100,6 +102,31 @@ function updateCharacter() {
   }
 }
 
+const platform1 = document.querySelector(".platform1");
+const platform2 = document.querySelector(".platform2");
+
+function characterStandingOnPlatform() {
+  if (
+    character.x + character.width > platform1.offsetLeft &&
+    character.x < platform1.offsetLeft + platform1.offsetWidth &&
+    character.y + character.height > platform1.offsetTop &&
+    character.y < platform1.offsetTop + platform1.offsetHeight
+  ) {
+    character.y = platform1.offsetTop - character.height;
+    character.jumping = false; // Megállítjuk az ugrást
+    character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
+  } else if (
+    character.x + character.width > platform2.offsetLeft &&
+    character.x < platform2.offsetLeft + platform2.offsetWidth &&
+    character.y + character.height > platform2.offsetTop &&
+    character.y < platform2.offsetTop + platform2.offsetHeight
+  ) {
+    character.y = platform2.offsetTop - character.height;
+    character.jumping = false; // Megállítjuk az ugrást
+    character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
+  }
+}
+
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // képernyő törlése
   ctx.drawImage(
@@ -110,13 +137,15 @@ function gameLoop() {
     character.height
   ); // karakter rajzolása
 
-  updateCharacter(); // karakter mozgatása
+  updateCharacter() // karakter mozgatása
 
   collisionDetection(); // ütközés detektálás
 
   characterOnGround(); // karakter a földön van-e
 
   requestAnimationFrame(gameLoop);
+
+  characterStandingOnPlatform(); // karakter a platformon áll-e
 }
 
 gameLoop();
