@@ -150,6 +150,19 @@ function characterStandingOnPlatform() {
   }
 }
 
+const goal = document.querySelector(".goal1");
+function goalReached() {
+  if (
+    character.x + character.width > goal.offsetLeft &&
+    character.x < goal.offsetLeft + goal.offsetWidth &&
+    character.y + character.height > goal.offsetTop &&
+    character.y < goal.offsetTop + goal.offsetHeight
+  ) {
+    alert("Goal reached!");
+    window.location.reload();
+  }
+}
+
 function restartGame() {
   if (character.y == canvas.height - character.height) {
     character.x = 0;
@@ -180,6 +193,8 @@ function gameLoop() {
   characterStandingOnPlatform(); // karakter a platformon áll-e
 
   restartGame(); // újrakezdés
+
+  goalReached();
 }
 
 gameLoop();

@@ -113,3 +113,24 @@ img {
   position: absolute;
   background-color: #d3d3d3;
 }
+
+.goal1 {
+  top: 450px;
+  left: 1550px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.95);
+  }
+}
