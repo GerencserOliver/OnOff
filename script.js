@@ -19,14 +19,14 @@ characterImage.addEventListener("error", function () {
 const character = {
   x: 0,
   y: 0,
-  width: 150,
-  height: 150,
+  width: 80,
+  height: 130,
   jumping: false,
   jumpHeight: 500,
   jumpCount: 0,
   jumpSpeed: 2000,
   fallSpeed: 2000,
-  speed: 1500,
+  speed: 1000,
   velocityX: 0,
   gravity: 0.5,
   velocityY: 0,
@@ -57,6 +57,23 @@ document.addEventListener("keydown", function (event) {
 
 document.addEventListener("keyup", function (event) {
   keys[event.key] = false; // ha felengedjük a gombot
+});
+
+let isColorSwitched = false;
+let playerInterval = null;
+
+document.addEventListener("keydown", function (event) {
+  // ha lenyomjuk a space-t akkor a platformok színe változik
+  if (event.code == "Space") {
+    if (isColorSwitched) {
+      platform1.style.backgroundColor = "#d3d3d3";
+      platform2.style.backgroundColor = "#d3d3d3";
+    } else {
+      platform1.style.backgroundColor = "#a9a9a9";
+      platform2.style.backgroundColor = "#a9a9a9";
+    }
+    isColorSwitched = !isColorSwitched; // azért kell, hogy a következő lenyomásnál visszaállítsa a színeket
+  }
 });
 
 var lastUpdate = Date.now();
@@ -114,24 +131,22 @@ const platform1 = document.querySelector(".platform1");
 const platform2 = document.querySelector(".platform2");
 
 function characterStandingOnPlatform() {
-  if (
-    character.x + character.width > platform1.offsetLeft &&
-    character.x < platform1.offsetLeft + platform1.offsetWidth &&
-    character.y + character.height > platform1.offsetTop &&
-    character.y < platform1.offsetTop + platform1.offsetHeight
-  ) {
-    character.y = platform1.offsetTop - character.height;
-    character.jumping = false; // Megállítjuk az ugrást
-    character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
-  } else if (
-    character.x + character.width > platform2.offsetLeft &&
-    character.x < platform2.offsetLeft + platform2.offsetWidth &&
-    character.y + character.height > platform2.offsetTop &&
-    character.y < platform2.offsetTop + platform2.offsetHeight
-  ) {
-    character.y = platform2.offsetTop - character.height;
-    character.jumping = false; // Megállítjuk az ugrást
-    character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
+  var platforms = [platform1, platform2]; // platform1, platform2 stb. helyett az összes platformot ide kell felsorolni
+
+  for (var i = 0; i < platforms.length; i++) {
+    var platform = platforms[i];
+
+    if (
+      character.x + character.width > platform.offsetLeft &&
+      character.x < platform.offsetLeft + platform.offsetWidth &&
+      character.y + character.height > platform.offsetTop &&
+      character.y < platform.offsetTop + platform.offsetHeight
+    ) {
+      character.y = platform.offsetTop - character.height;
+      character.jumping = false; // Megállítjuk az ugrást
+      character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
+      break; // Ha találtunk egy platformot, kilépünk a ciklusból
+    }
   }
 }
 
@@ -139,6 +154,8 @@ function restartGame() {
   if (character.y == canvas.height - character.height) {
     character.x = 0;
     character.y = 0;
+    platform1.style.backgroundColor = "#d3d3d3";
+    platform2.style.backgroundColor = "#d3d3d3";
   }
 }
 

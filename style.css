@@ -97,18 +97,18 @@ img {
 }
 
 .platform1 {
-  top: 600px;
-  left: 400px;
-  width: 400px;
+  top: 550px;
+  left: 255px;
+  width: 600px;
   height: 5000px;
   position: absolute;
   background-color: #d3d3d3;
 }
 
 .platform2 {
-  top: 600px;
-  left: 1100px;
-  width: 400px;
+  top: 550px;
+  left: 1065px;
+  width: 600px;
   height: 5000px;
   position: absolute;
   background-color: #d3d3d3;
