@@ -67,14 +67,22 @@ function updateCharacter() {
   lastUpdate = now;
 
   if (
-    keys["w"] &&
-    !character.jumping && // ha lenyomjuk a w-t és nem ugrunk (nem a levegőben vagyunk)
-    (character.y >= canvas.height - character.height || characterStandingOnPlatform()) // és a karakter a földön van vagy a platformon áll
+    keys["w"] && // w lenyomva
+    !character.jumping
   ) {
-    character.jumping = true; // akkor ugrunk
-    character.jumpCount = 0;
-    character.velocityY = -character.jumpSpeed * dt;
+    character.jumping = true; // ugrás
+    character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
+    character.jumpCount = 0; // ugrás számláló
   }
+  // keys["w"] &&
+  //   !character.jumping && // ha lenyomjuk a w-t és nem ugrunk (nem a levegőben vagyunk)
+  //   (character.y >= canvas.height - character.height ||
+  //     characterStandingOnPlatform()) // és a karakter a földön van vagy a platformon áll
+  // ) {
+  //   character.jumping = true; // akkor ugrunk
+  //   character.jumpCount = 0;
+  //   character.velocityY = -character.jumpSpeed * dt;
+  // }
 
   if (keys["a"]) {
     character.velocityX = -character.speed * dt; // balra mozgás
@@ -127,6 +135,13 @@ function characterStandingOnPlatform() {
   }
 }
 
+function restartGame() {
+  if (character.y == canvas.height - character.height) {
+    character.x = 0;
+    character.y = 0;
+  }
+}
+
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // képernyő törlése
   ctx.drawImage(
@@ -137,7 +152,7 @@ function gameLoop() {
     character.height
   ); // karakter rajzolása
 
-  updateCharacter() // karakter mozgatása
+  updateCharacter(); // karakter mozgatása
 
   collisionDetection(); // ütközés detektálás
 
@@ -146,6 +161,8 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 
   characterStandingOnPlatform(); // karakter a platformon áll-e
+
+  restartGame(); // újrakezdés
 }
 
 gameLoop();
