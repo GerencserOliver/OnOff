@@ -25,7 +25,7 @@ const character = {
   jumpHeight: 500,
   jumpCount: 0,
   jumpSpeed: 2000,
-  fallSpeed: 2000,
+  fallSpeed: 1000,
   speed: 1000,
   velocityX: 0,
   gravity: 0.5,
@@ -66,11 +66,13 @@ document.addEventListener("keydown", function (event) {
   // ha lenyomjuk a space-t akkor a platformok színe változik
   if (event.code == "Space") {
     if (isColorSwitched) {
-      platform1.style.backgroundColor = "#d3d3d3";
-      platform2.style.backgroundColor = "#d3d3d3";
+      platform1.style.backgroundColor = "#3b3b3b";
+      platform2.style.backgroundColor = "#3b3b3b";
+      document.body.style.backgroundColor = "#ffffff";
     } else {
-      platform1.style.backgroundColor = "#a9a9a9";
-      platform2.style.backgroundColor = "#a9a9a9";
+      platform1.style.backgroundColor = "#636363";
+      platform2.style.backgroundColor = "#636363";
+      document.body.style.backgroundColor = "#333333";
     }
     isColorSwitched = !isColorSwitched; // azért kell, hogy a következő lenyomásnál visszaállítsa a színeket
   }
@@ -136,6 +138,10 @@ function characterStandingOnPlatform() {
   for (var i = 0; i < platforms.length; i++) {
     var platform = platforms[i];
 
+    if (isColorSwitched) {
+      continue;
+    }
+
     if (
       character.x + character.width > platform.offsetLeft &&
       character.x < platform.offsetLeft + platform.offsetWidth &&
@@ -147,6 +153,25 @@ function characterStandingOnPlatform() {
       character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
       break; // Ha találtunk egy platformot, kilépünk a ciklusból
     }
+    // if the color is switched, the character can fall through the platforms
+    if (isColorSwitched) {
+    }
+  }
+}
+
+let death = 0;
+function deathCounter() {
+  if (character.y == canvas.height - character.height) {
+    death++;
+    document.querySelector(".death").innerHTML = "Deaths: " + death;
+  }
+}
+
+let stars = 0;
+function starsCollected() {
+  if (goalReached) {
+    stars++;
+    document.querySelector(".stars").innerHTML = "Stars: " + stars;
   }
 }
 
@@ -163,12 +188,10 @@ function goalReached() {
   }
 }
 
-function restartGame() {
+function StartAgain() {
   if (character.y == canvas.height - character.height) {
     character.x = 0;
     character.y = 0;
-    platform1.style.backgroundColor = "#d3d3d3";
-    platform2.style.backgroundColor = "#d3d3d3";
   }
 }
 
@@ -192,7 +215,9 @@ function gameLoop() {
 
   characterStandingOnPlatform(); // karakter a platformon áll-e
 
-  restartGame(); // újrakezdés
+  deathCounter(); // halál számláló
+
+  StartAgain(); // újrakezdés
 
   goalReached();
 }
