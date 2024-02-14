@@ -195,6 +195,9 @@ function StartAgain() {
   if (character.y == canvas.height - character.height) {
     character.x = 0;
     character.y = 0;
+    keys["w"] = false;
+    keys["a"] = false;
+    keys["d"] = false;
   }
 }
 
