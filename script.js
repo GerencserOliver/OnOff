@@ -184,7 +184,10 @@ function goalReached() {
     character.y < goal.offsetTop + goal.offsetHeight
   ) {
     alert("Goal reached!");
-    window.location.reload();
+    death = -1;
+    document.querySelector(".death").innerHTML = "Deaths: " + death;
+    stars++;
+    document.querySelector(".stars").innerHTML = "Stars: " + stars;
   }
 }
 
@@ -217,9 +220,9 @@ function gameLoop() {
 
   deathCounter(); // halál számláló
 
-  StartAgain(); // újrakezdés
-
   goalReached();
+
+  StartAgain(); // újrakezdés
 }
 
 gameLoop();
