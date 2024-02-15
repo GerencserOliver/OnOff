@@ -22,9 +22,9 @@ const character = {
   width: 80,
   height: 130,
   jumping: false,
-  jumpHeight: 500,
+  jumpHeight: 200,
   jumpCount: 0,
-  jumpSpeed: 2000,
+  jumpSpeed: 1500,
   fallSpeed: 1000,
   speed: 1000,
   velocityX: 0,
@@ -87,21 +87,12 @@ function updateCharacter() {
 
   if (
     keys["w"] && // w lenyomva
-    !character.jumping
+    character.y == platform1.offsetTop - character.height // karakter a platformon van
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
     character.jumpCount = 0; // ugrás számláló
   }
-  // keys["w"] &&
-  //   !character.jumping && // ha lenyomjuk a w-t és nem ugrunk (nem a levegőben vagyunk)
-  //   (character.y >= canvas.height - character.height ||
-  //     characterStandingOnPlatform()) // és a karakter a földön van vagy a platformon áll
-  // ) {
-  //   character.jumping = true; // akkor ugrunk
-  //   character.jumpCount = 0;
-  //   character.velocityY = -character.jumpSpeed * dt;
-  // }
 
   if (keys["a"]) {
     character.velocityX = -character.speed * dt; // balra mozgás
