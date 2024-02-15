@@ -150,6 +150,23 @@ function characterStandingOnPlatform() {
   }
 }
 
+function winAnimation() {
+  if (goalReached) {
+    document.body.innerHTML = "";
+    document.body.style.backgroundColor = "#3b3b3b";
+    const win = document.createElement("h1");
+    win.innerHTML = "You won!";
+    win.style.color = "white";
+    win.style.textAlign = "center";
+    win.style.fontSize = "100px";
+    win.style.marginTop = "50vh";
+    document.body.appendChild(win);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
+}
+
 let death = 0;
 function deathCounter() {
   if (character.y == canvas.height - character.height) {
@@ -174,7 +191,7 @@ function goalReached() {
     character.y + character.height > goal.offsetTop &&
     character.y < goal.offsetTop + goal.offsetHeight
   ) {
-    alert("Goal reached!");
+    winAnimation();
     death = -1;
     document.querySelector(".death").innerHTML = "Deaths: " + death;
     stars++;
