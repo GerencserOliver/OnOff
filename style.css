@@ -144,6 +144,45 @@ img {
   transform: translate(-50%, -50%);
 }
 
+.platform1_lvl2{
+  top: 750px;
+  left: 255px;
+  width: 1410px;
+  height: 5000px;
+  position: absolute;
+  background-color: #3b3b3b;
+  z-index: -1;
+}
+
+.platform2_lvl2{
+  top: 200px;
+  left: 255px;
+  width: 1410px;
+  height: 20px;
+  position: absolute;
+  background-color: #3b3b3b;
+  z-index: -1;
+}
+
+.platform3_lvl2{
+  top: 450px;
+  left: 255px;
+  width: 1410px;
+  height: 20px;
+  position: absolute;
+  background-color: #3b3b3b;
+  z-index: -1;
+}
+
+.goal2{
+  top: 650px;
+  left: 1550px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: pulse 2s infinite;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(0.8);

@@ -1,3 +1,6 @@
+let lvl = 1;
+let playerSpawnX = 0;
+let playerSpawnY = 0;
 const canvas = document.createElement("canvas"); // rajzolás
 const ctx = canvas.getContext("2d");
 document.body.appendChild(canvas); // megjelenítés
@@ -62,16 +65,26 @@ document.addEventListener("keyup", function (event) {
 let isColorSwitched = false;
 let playerInterval = null;
 
+let platform1 = document.querySelector(".platform1");
+let platform2 = document.querySelector(".platform2");
+let platform3 = document.querySelector(".platform1_lvl2");
+let platform4 = document.querySelector(".platform2_lvl2");
+let platform5 = document.querySelector(".platform3_lvl2");
+
+var platforms = [];
+
 document.addEventListener("keydown", function (event) {
   // ha lenyomjuk a space-t akkor a platformok színe változik
   if (event.code == "Space") {
     if (isColorSwitched) {
-      platform1.style.backgroundColor = "#3b3b3b";
-      platform2.style.backgroundColor = "#3b3b3b";
+      platforms.forEach(platform => {
+        platform.style.backgroundColor = "#3b3b3b";
+      });
       document.body.style.backgroundColor = "#ffffff";
     } else {
-      platform1.style.backgroundColor = "#636363";
-      platform2.style.backgroundColor = "#636363";
+      platforms.forEach(platform => {
+        platform.style.backgroundColor = "#636363";
+      });
       document.body.style.backgroundColor = "#333333";
     }
     isColorSwitched = !isColorSwitched; // azért kell, hogy a következő lenyomásnál visszaállítsa a színeket
@@ -86,8 +99,10 @@ function updateCharacter() {
   lastUpdate = now;
 
   if (
-    keys["w"] && // w lenyomva
-    character.y == platform1.offsetTop - character.height // karakter a platformon van
+    keys["w"] && lvl == 1 && character.y == platform1.offsetTop - character.height ||
+    keys["w"] && lvl == 2 && character.y == platform3.offsetTop - character.height ||
+    keys["w"] && lvl == 2 && character.y == platform4.offsetTop - character.height ||
+    keys["w"] && lvl == 2 && character.y == platform5.offsetTop - character.height
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
@@ -120,11 +135,18 @@ function updateCharacter() {
   }
 }
 
-const platform1 = document.querySelector(".platform1");
-const platform2 = document.querySelector(".platform2");
-
 function characterStandingOnPlatform() {
-  var platforms = [platform1, platform2]; // platform1, platform2 stb. helyett az összes platformot ide kell felsorolni
+  platform1 = document.querySelector(".platform1");
+  platform2 = document.querySelector(".platform2");
+  platform3 = document.querySelector(".platform1_lvl2");
+  platform4 = document.querySelector(".platform2_lvl2");
+  platform5 = document.querySelector(".platform3_lvl2");
+
+  if(lvl == 1){
+    platforms = [platform1, platform2];
+  } else if(lvl == 2){
+    platforms = [platform3, platform4, platform5];
+  }
 
   for (var i = 0; i < platforms.length; i++) {
     var platform = platforms[i];
@@ -142,7 +164,6 @@ function characterStandingOnPlatform() {
     ) {
       character.y = platform.offsetTop - character.height;
       character.jumping = false;
-    
     }
 
     if (
@@ -172,7 +193,6 @@ function winAnimation() {
     win.style.marginTop = "50vh";
     document.body.appendChild(win);
     setTimeout(() => {
-      window.location.reload();
     }, 1000);
   }
 }
@@ -194,6 +214,7 @@ function starsCollected() {
 }
 
 const goal = document.querySelector(".goal1");
+
 function goalReached() {
   if (
     character.x + character.width > goal.offsetLeft &&
@@ -201,8 +222,11 @@ function goalReached() {
     character.y + character.height > goal.offsetTop &&
     character.y < goal.offsetTop + goal.offsetHeight
   ) {
-    winAnimation();
-    death = -1;
+    lvl++;
+    keys["w"] = false;
+    keys["a"] = false;
+    keys["d"] = false;
+    spawnMap();
     document.querySelector(".death").innerHTML = "Deaths: " + death;
     stars++;
     document.querySelector(".stars").innerHTML = "Stars: " + stars;
@@ -211,12 +235,44 @@ function goalReached() {
 
 function StartAgain() {
   if (character.y == canvas.height - character.height) {
-    character.x = 0;
-    character.y = 0;
+    character.x = playerSpawnX;
+    character.y = playerSpawnY;
     keys["w"] = false;
     keys["a"] = false;
     keys["d"] = false;
   }
+}
+
+function spawnMap(){
+  const map = document.querySelector("#map");
+  map.innerHTML = "";
+  if(lvl == 1){
+    let p1 = document.createElement("div");
+    let p2 = document.createElement("div");
+    p1.className = "platform1";
+    p2.className = "platform2";
+    map.appendChild(p1);
+    map.appendChild(p2);
+    playerSpawnX = 0;
+    playerSpawnY = 0;
+  } else if(lvl == 2){
+    let p3 = document.createElement("div");
+    let p4 = document.createElement("div");
+    let p5 = document.createElement("div");
+    p3.className = "platform1_lvl2";
+    p4.className = "platform2_lvl2";
+    p5.className = "platform3_lvl2";
+    map.appendChild(p3);
+    map.appendChild(p4);
+    map.appendChild(p5);
+    playerSpawnX = 300;
+    playerSpawnY = 0;
+  }
+  character.x = playerSpawnX;
+  character.y = playerSpawnY;
+  let goal = document.createElement("div");
+  goal.innerHTML = `<img src="img/goal.png" class="goal${lvl}" alt="" />`;
+  map.appendChild(goal);
 }
 
 function gameLoop() {
