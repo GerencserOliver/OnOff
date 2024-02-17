@@ -137,16 +137,29 @@ function characterStandingOnPlatform() {
       character.x + character.width > platform.offsetLeft &&
       character.x < platform.offsetLeft + platform.offsetWidth &&
       character.y + character.height > platform.offsetTop &&
-      character.y < platform.offsetTop + platform.offsetHeight
+      character.y < platform.offsetTop + platform.offsetHeight &&
+      character.y + character.height < platform.offsetTop + character.fallSpeed / 60
     ) {
       character.y = platform.offsetTop - character.height;
       character.jumping = false; // Megállítjuk az ugrást
       character.velocityY = 0; // Beállítjuk a függőleges sebességet 0-ra
       break; // Ha találtunk egy platformot, kilépünk a ciklusból
     }
-    // if the color is switched, the character can fall through the platforms
-    if (isColorSwitched) {
+
+    // if the character touches the side of the platform it stops
+    if (
+      character.x + character.width > platform.offsetLeft &&
+      character.x < platform.offsetLeft + platform.offsetWidth &&
+      character.y + character.height > platform.offsetTop &&
+      character.y < platform.offsetTop + platform.offsetHeight
+    ) {
+      if (keys["a"]) {
+        character.x = platform.offsetLeft + platform.offsetWidth; // ha a karakter bal széle érinti a platformot, akkor nem mehet tovább balra
+      } else if (keys["d"]) {
+        character.x = platform.offsetLeft - character.width; // ha a karakter jobb széle érinti a platformot, akkor nem mehet tovább jobbra
+      }
     }
+
   }
 }
 
