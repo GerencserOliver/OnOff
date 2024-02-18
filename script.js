@@ -275,7 +275,20 @@ function spawnMap(){
   map.appendChild(goal);
 }
 
+let isTabActive = true;
+
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    isTabActive = false;
+  } else {
+    isTabActive = true;
+    gameLoop();
+  }
+});
+
 function gameLoop() {
+  if (!isTabActive) return;
+
   ctx.clearRect(0, 0, canvas.width, canvas.height); // képernyő törlése
   ctx.drawImage(
     characterImage,
