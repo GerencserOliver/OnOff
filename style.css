@@ -185,7 +185,7 @@ img {
 
 .platform1_lvl3 {
   top: 550px;
-  left: 200px;
+  left: 255px;
   width: 510px;
   height: 5000px;
   position: absolute;
@@ -195,7 +195,7 @@ img {
 
 .platform2_lvl3 {
   top: 550px;
-  left: 950px;
+  left: 1065px;
   width: 510px;
   height: 5000px;
   position: absolute;
@@ -205,7 +205,7 @@ img {
 
 .goal3{
   top: 450px;
-  left: 1340px;
+  left: 1470px;
   width: 100px;
   height: 100px;
   position: absolute;
@@ -224,7 +224,7 @@ img {
 
 .platform2_lvl4 {
   top: 550px;
-  left: 700px;
+  left: 800px;
   width: 300px;
   height: 5000px;
   position: absolute;
@@ -234,7 +234,7 @@ img {
 
 .platform3_lvl4 {
   top: 550px;
-  left: 1200px;
+  left: 1400px;
   width: 300px;
   height: 5000px;
   position: absolute;
@@ -244,7 +244,7 @@ img {
 
 .goal4 {
   top: 450px;
-  left: 1340px;
+  left: 1600px;
   width: 100px;
   height: 100px;
   position: absolute;

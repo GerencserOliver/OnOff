@@ -260,23 +260,39 @@ function starsCollected() {
   }
 }
 
-const goal = document.querySelector(".goal1");
+var goals =[]
 
 function goalReached() {
-  if (
-    character.x + character.width > goal.offsetLeft &&
-    character.x < goal.offsetLeft + goal.offsetWidth &&
-    character.y + character.height > goal.offsetTop &&
-    character.y < goal.offsetTop + goal.offsetHeight
-  ) {
-    lvl++;
-    keys["w"] = false;
-    keys["a"] = false;
-    keys["d"] = false;
-    spawnMap();
-    document.querySelector(".death").innerHTML = "Deaths: " + death;
-    stars++;
-    document.querySelector(".stars").innerHTML = "Stars: " + stars;
+  const goal1 = document.querySelector(".goal1");
+  const goal2 = document.querySelector(".goal2");
+  const goal3 = document.querySelector(".goal3");
+  
+  if(lvl == 1){
+    goals = [goal1];
+  } else if (lvl == 2){
+    goals = [goal2];
+  } else if(lvl == 3){
+    goals = [goal3];
+  }
+
+  for (var i = 0; i < goals.length; i++) {
+    var goal = goals[i];
+
+    if (
+      character.x + character.width > goal.offsetLeft &&
+      character.x < goal.offsetLeft + goal.offsetWidth &&
+      character.y + character.height > goal.offsetTop &&
+      character.y < goal.offsetTop + goal.offsetHeight
+    ) {
+      lvl++;
+      keys["w"] = false;
+      keys["a"] = false;
+      keys["d"] = false;
+      spawnMap();
+      document.querySelector(".death").innerHTML = "Deaths: " + death;
+      stars++;
+      document.querySelector(".stars").innerHTML = "Stars: " + stars;
+    }
   }
 }
 
@@ -306,24 +322,29 @@ function spawnMap() {
     let p3 = document.createElement("div");
     let p4 = document.createElement("div");
     let p5 = document.createElement("div");
+    let goal2 = document.createElement("div");
     p3.className = "platform1_lvl2";
     p3.dataset.on = "true";
     p4.className = "platform2_lvl2";
     p4.dataset.on = "true";
     p5.className = "platform3_lvl2";
     p5.dataset.on = "false";
+    goal2.className = "goal2";
     map.appendChild(p3);
     map.appendChild(p4);
     map.appendChild(p5);
+    map.appendChild(goal2);
     playerSpawnX = 300;
     playerSpawnY = 0;
   } else if (lvl == 3){
     let p6 = document.createElement("div");
     let p7 = document.createElement("div");
+    let goal3 = document.createElement("div");
     p6.className = "platform1_lvl3";
     p6.dataset.on = "true";
     p7.className = "platform2_lvl3";
     p7.dataset.on = "false";
+    goal3.className = "goal3";
     map.appendChild(p6);
     map.appendChild(p7);
     playerSpawnX = 200;
@@ -351,12 +372,8 @@ function spawnMap() {
   map.appendChild(goal);
 }
 
-let isTabActive = true;
-
 
 function gameLoop() {
-  if (!isTabActive) return;
-
   ctx.clearRect(0, 0, canvas.width, canvas.height); // képernyő törlése
   ctx.drawImage(
     characterImage,
@@ -384,17 +401,5 @@ function gameLoop() {
 
   setTimeout(gameLoop, 1000 / 60); // 60 fps
 }
-window.addEventListener('load', function (e) {
-  gameLoop();
-  window.addEventListener('blur', function (f) {
-    isTabActive = false;
-    if (e.target.hasFocus()) {
-      isTabActive = true;
-      gameLoop();
-    }
-    // if () {
-    //   isTabActive = true;
-    //   gameLoop();
-    // }
-  })
-});
+
+gameLoop();
