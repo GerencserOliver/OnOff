@@ -307,14 +307,6 @@ function spawnMap() {
 
 let isTabActive = true;
 
-document.addEventListener('visibilitychange', function () {
-  if (document.hidden) {
-    isTabActive = false;
-  } else {
-    isTabActive = true;
-    gameLoop();
-  }
-});
 
 function gameLoop() {
   if (!isTabActive) return;
@@ -346,5 +338,17 @@ function gameLoop() {
 
   setTimeout(gameLoop, 1000 / 60); // 60 fps
 }
-
-gameLoop();
+window.addEventListener('load', function (e) {
+  gameLoop();
+  window.addEventListener('blur', function (f) {
+    isTabActive = false;
+    if (e.target.hasFocus()) {
+      isTabActive = true;
+      gameLoop();
+    }
+    // if () {
+    //   isTabActive = true;
+    //   gameLoop();
+    // }
+  })
+});
