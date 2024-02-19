@@ -25,7 +25,7 @@ const character = {
   width: 80,
   height: 130,
   jumping: false,
-  jumpHeight: 200,
+  jumpHeight: 300,
   jumpCount: 0,
   jumpSpeed: 1500,
   fallSpeed: 1000,
@@ -142,9 +142,9 @@ function characterStandingOnPlatform() {
   platform4 = document.querySelector(".platform2_lvl2");
   platform5 = document.querySelector(".platform3_lvl2");
 
-  if(lvl == 1){
+  if (lvl == 1) {
     platforms = [platform1, platform2];
-  } else if(lvl == 2){
+  } else if (lvl == 2) {
     platforms = [platform3, platform4, platform5];
   }
 
@@ -171,15 +171,38 @@ function characterStandingOnPlatform() {
       character.x < platform.offsetLeft + platform.offsetWidth &&
       character.y + character.height > platform.offsetTop &&
       character.y < platform.offsetTop + platform.offsetHeight
-    ) { 
-      if(keys["a"]){
+    ) {
+      if (keys["a"]) {
         character.x = platform.offsetLeft + platform.offsetWidth;
-      } else if(keys["d"]){
+      } else if (keys["d"]) {
         character.x = platform.offsetLeft - character.width;
       }
     }
   }
 }
+
+function BottomPlatformCollision() {
+  for (var i = 0; i < platforms.length; i++) {
+    var platform = platforms[i];
+
+    if (isColorSwitched) {
+      continue;
+    }
+
+    if (
+      character.x + character.width > platform.offsetLeft &&
+      character.x < platform.offsetLeft + platform.offsetWidth &&
+      character.y + character.height > platform.offsetTop &&
+      character.y < platform.offsetTop + platform.offsetHeight
+    ) {
+      if (character.y + character.height > platform.offsetTop + platform.offsetHeight) {
+        character.y = platform.offsetTop + platform.offsetHeight;
+      }
+    }
+  }
+
+}
+
 
 function winAnimation() {
   if (goalReached) {
@@ -243,10 +266,10 @@ function StartAgain() {
   }
 }
 
-function spawnMap(){
+function spawnMap() {
   const map = document.querySelector("#map");
   map.innerHTML = "";
-  if(lvl == 1){
+  if (lvl == 1) {
     let p1 = document.createElement("div");
     let p2 = document.createElement("div");
     p1.className = "platform1";
@@ -255,7 +278,7 @@ function spawnMap(){
     map.appendChild(p2);
     playerSpawnX = 0;
     playerSpawnY = 0;
-  } else if(lvl == 2){
+  } else if (lvl == 2) {
     let p3 = document.createElement("div");
     let p4 = document.createElement("div");
     let p5 = document.createElement("div");
@@ -277,7 +300,7 @@ function spawnMap(){
 
 let isTabActive = true;
 
-document.addEventListener('visibilitychange', function() {
+document.addEventListener('visibilitychange', function () {
   if (document.hidden) {
     isTabActive = false;
   } else {
@@ -309,6 +332,8 @@ function gameLoop() {
   deathCounter(); // halál számláló
 
   goalReached();
+
+  BottomPlatformCollision();
 
   StartAgain(); // újrakezdés
 
