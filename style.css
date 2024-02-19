@@ -183,6 +183,74 @@ img {
   animation: pulse 2s infinite;
 }
 
+.platform1_lvl3 {
+  top: 550px;
+  left: 200px;
+  width: 510px;
+  height: 5000px;
+  position: absolute;
+  background-color: #D3D3D3;
+  z-index: -1;
+}
+
+.platform2_lvl3 {
+  top: 550px;
+  left: 950px;
+  width: 510px;
+  height: 5000px;
+  position: absolute;
+  background-color:#3b3b3b;
+  z-index: -1;
+}
+
+.goal3{
+  top: 450px;
+  left: 1340px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: pulse 2s infinite;
+}
+
+.platform1_lvl4 {
+  top: 550px;
+  left: 200px;
+  width: 300px;
+  height: 5000px;
+  position: absolute;
+  background-color: #D3D3D3;
+  z-index: -1;
+}
+
+.platform2_lvl4 {
+  top: 550px;
+  left: 700px;
+  width: 300px;
+  height: 5000px;
+  position: absolute;
+  background-color: #3b3b3b;
+  z-index: -1;
+}
+
+.platform3_lvl4 {
+  top: 550px;
+  left: 1200px;
+  width: 300px;
+  height: 5000px;
+  position: absolute;
+  background-color: #D3D3D3;
+  z-index: -1;
+}
+
+.goal4 {
+  top: 450px;
+  left: 1340px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: pulse 2s infinite;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(0.8);

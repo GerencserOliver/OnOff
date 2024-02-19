@@ -70,6 +70,11 @@ let platform2 = document.querySelector(".platform2");
 let platform3 = document.querySelector(".platform1_lvl2");
 let platform4 = document.querySelector(".platform2_lvl2");
 let platform5 = document.querySelector(".platform3_lvl2");
+let platform6 = document.querySelector(".platform1_lvl3");
+let platform7 = document.querySelector(".platform2_lvl3");
+let platform8 = document.querySelector(".platform1_lvl4");
+let platform9 = document.querySelector(".platform2_lvl4");
+let platform10 = document.querySelector(".platform1_lvl4");
 
 var platforms = [];
 
@@ -102,9 +107,15 @@ function updateCharacter() {
 
   if (
     keys["w"] && lvl == 1 && character.y == platform1.offsetTop - character.height ||
+    keys["w"] && lvl == 1 && character.y == platform2.offsetTop - character.height ||
     keys["w"] && lvl == 2 && character.y == platform3.offsetTop - character.height ||
     keys["w"] && lvl == 2 && character.y == platform4.offsetTop - character.height ||
-    keys["w"] && lvl == 2 && character.y == platform5.offsetTop - character.height
+    keys["w"] && lvl == 2 && character.y == platform5.offsetTop - character.height ||
+    keys["w"] && lvl == 3 && character.y == platform6.offsetTop - character.height ||
+    keys["w"] && lvl == 3 && character.y == platform7.offsetTop - character.height ||
+    keys["w"] && lvl == 4 && character.y == platform8.offsetTop - character.height ||
+    keys["w"] && lvl == 4 && character.y == platform9.offsetTop - character.height ||
+    keys["w"] && lvl == 4 && character.y == platform10.offsetTop - character.height
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
@@ -143,11 +154,20 @@ function characterStandingOnPlatform() {
   platform3 = document.querySelector(".platform1_lvl2");
   platform4 = document.querySelector(".platform2_lvl2");
   platform5 = document.querySelector(".platform3_lvl2");
+  platform6 = document.querySelector(".platform1_lvl3");
+  platform7 = document.querySelector(".platform2_lvl3");
+  platform8 = document.querySelector(".platform1_lvl4");
+  platform9 = document.querySelector(".platform2_lvl4");
+  platform10 = document.querySelector(".platform3_lvl4");
 
   if (lvl == 1) {
     platforms = [platform1, platform2];
   } else if (lvl == 2) {
     platforms = [platform3, platform4, platform5];
+  } else if (lvl == 3){
+    platforms = [platform6, platform7];
+  } else if (lvl == 4) {
+    platforms = [platform8, platform9, platform10];
   }
 
   for (var i = 0; i < platforms.length; i++) {
@@ -296,6 +316,32 @@ function spawnMap() {
     map.appendChild(p4);
     map.appendChild(p5);
     playerSpawnX = 300;
+    playerSpawnY = 0;
+  } else if (lvl == 3){
+    let p6 = document.createElement("div");
+    let p7 = document.createElement("div");
+    p6.className = "platform1_lvl3";
+    p6.dataset.on = "true";
+    p7.className = "platform2_lvl3";
+    p7.dataset.on = "false";
+    map.appendChild(p6);
+    map.appendChild(p7);
+    playerSpawnX = 200;
+    playerSpawnY = 0;
+  } else if (lvl == 4){
+    let p8 = document.createElement("div");
+    let p9 = document.createElement("div");
+    let p10 = document.createElement("div");
+    p8.className = "platform1_lvl4";
+    p8.dataset.on = "true";
+    p9.className = "platform2_lvl4";
+    p9.dataset.on = "false";
+    p10.className = "platform3_lvl4";
+    p10.dataset.on = "true";
+    map.appendChild(p8);
+    map.appendChild(p9);
+    map.appendChild(p10);
+    playerSpawnX = 200;
     playerSpawnY = 0;
   }
   character.x = playerSpawnX;
