@@ -144,27 +144,27 @@ img {
   transform: translate(-50%, -50%);
 }
 
-.platform1_lvl2{
+.platform1_lvl2 {
   top: 750px;
   left: 255px;
   width: 1410px;
   height: 5000px;
   position: absolute;
-  background-color: #3b3b3b;
+  background-color: #D3D3D3;
   z-index: -1;
 }
 
-.platform2_lvl2{
+.platform2_lvl2 {
   top: 200px;
   left: 255px;
   width: 1410px;
   height: 20px;
   position: absolute;
-  background-color: #3b3b3b;
+  background-color: #D3D3D3;
   z-index: -1;
 }
 
-.platform3_lvl2{
+.platform3_lvl2 {
   top: 450px;
   left: 255px;
   width: 1410px;
@@ -174,7 +174,7 @@ img {
   z-index: -1;
 }
 
-.goal2{
+.goal2 {
   top: 650px;
   left: 1550px;
   width: 100px;
@@ -187,9 +187,11 @@ img {
   0% {
     transform: scale(0.8);
   }
+
   70% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(0.8);
   }

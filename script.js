@@ -78,12 +78,14 @@ document.addEventListener("keydown", function (event) {
   if (event.code == "Space") {
     if (isColorSwitched) {
       platforms.forEach(platform => {
-        platform.style.backgroundColor = "#3b3b3b";
+        platform.style.backgroundColor = "#D3D3D3";
+        if (platform.dataset.on == "true") platform.style.backgroundColor = "#3b3b3b";
       });
       document.body.style.backgroundColor = "#ffffff";
     } else {
       platforms.forEach(platform => {
-        platform.style.backgroundColor = "#636363";
+        platform.style.backgroundColor = "#3b3b3b";
+        if (platform.dataset.on == "true") platform.style.backgroundColor = "#D3D3D3";
       });
       document.body.style.backgroundColor = "#333333";
     }
@@ -152,7 +154,9 @@ function characterStandingOnPlatform() {
     var platform = platforms[i];
 
     if (isColorSwitched) {
-      continue;
+      if (platform.dataset.on == "true") continue;
+    } else {
+      if (platform.dataset.on == "false") continue;
     }
 
     if (
@@ -283,8 +287,11 @@ function spawnMap() {
     let p4 = document.createElement("div");
     let p5 = document.createElement("div");
     p3.className = "platform1_lvl2";
+    p3.dataset.on = "true";
     p4.className = "platform2_lvl2";
+    p4.dataset.on = "true";
     p5.className = "platform3_lvl2";
+    p5.dataset.on = "false";
     map.appendChild(p3);
     map.appendChild(p4);
     map.appendChild(p5);
