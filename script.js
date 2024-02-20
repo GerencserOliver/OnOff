@@ -75,6 +75,13 @@ let platform7 = document.querySelector(".platform2_lvl3");
 let platform8 = document.querySelector(".platform1_lvl4");
 let platform9 = document.querySelector(".platform2_lvl4");
 let platform10 = document.querySelector(".platform1_lvl4");
+let platform11 = document.querySelector(".platform1_lvl5");
+let platform12 = document.querySelector(".platform2_lvl5");
+let platform13 = document.querySelector(".platform3_lvl5");
+let platform14 = document.querySelector(".platform4_lvl5");
+let platform15 = document.querySelector(".platform5_lvl5");
+let platform16 = document.querySelector(".platform6_lvl5");
+let platform17 = document.querySelector(".platform7_lvl5");
 
 var platforms = [];
 
@@ -115,7 +122,14 @@ function updateCharacter() {
     keys["w"] && lvl == 3 && character.y == platform7.offsetTop - character.height ||
     keys["w"] && lvl == 4 && character.y == platform8.offsetTop - character.height ||
     keys["w"] && lvl == 4 && character.y == platform9.offsetTop - character.height ||
-    keys["w"] && lvl == 4 && character.y == platform10.offsetTop - character.height
+    keys["w"] && lvl == 4 && character.y == platform10.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform11.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform12.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform13.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform14.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform15.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform16.offsetTop - character.height ||
+    keys["w"] && lvl == 5 && character.y == platform17.offsetTop - character.height
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
@@ -198,6 +212,13 @@ function characterStandingOnPlatform() {
   platform8 = document.querySelector(".platform1_lvl4");
   platform9 = document.querySelector(".platform2_lvl4");
   platform10 = document.querySelector(".platform3_lvl4");
+  platform11 = document.querySelector(".platform1_lvl5");
+  platform12 = document.querySelector(".platform2_lvl5");
+  platform13 = document.querySelector(".platform3_lvl5");
+  platform14 = document.querySelector(".platform4_lvl5");
+  platform15 = document.querySelector(".platform5_lvl5");
+  platform16 = document.querySelector(".platform6_lvl5");
+  platform17 = document.querySelector(".platform7_lvl5");
 
   if (lvl == 1) {
     platforms = [platform1, platform2];
@@ -207,6 +228,8 @@ function characterStandingOnPlatform() {
     platforms = [platform6, platform7];
   } else if (lvl == 4) {
     platforms = [platform8, platform9, platform10];
+  } else if (lvl == 5){
+    platforms = [platform11, platform12, platform13, platform14, platform15, platform16, platform17];
   }
 
   for (var i = 0; i < platforms.length; i++) {
@@ -266,6 +289,18 @@ function BottomPlatformCollision() {
 
 }
 
+let isTabActive = true;
+
+document.addEventListener("visibilitychange", function() {
+  if(document.hidden){
+    isTabActive = false;
+    death -= 1;
+  } else{
+    isTabActive = true;
+    gameLoop();
+  }
+});
+
 
 function winAnimation() {
   if (goalReached) {
@@ -305,6 +340,7 @@ function goalReached() {
   const goal1 = document.querySelector(".goal1");
   const goal2 = document.querySelector(".goal2");
   const goal3 = document.querySelector(".goal3");
+  const goal4 = document.querySelector(".goal4");
   
   if(lvl == 1){
     goals = [goal1];
@@ -312,6 +348,8 @@ function goalReached() {
     goals = [goal2];
   } else if(lvl == 3){
     goals = [goal3];
+  } else if(lvl == 4){
+    goals = [goal4];
   }
 
   for (var i = 0; i < goals.length; i++) {
@@ -403,6 +441,37 @@ function spawnMap() {
     map.appendChild(p10);
     playerSpawnX = 200;
     playerSpawnY = 0;
+  } else if (lvl == 5){
+    let p11 = document.createElement("div");
+    let p12 = document.createElement("div");
+    let p13 = document.createElement("div");
+    let p14 = document.createElement("div");
+    let p15 = document.createElement("div");
+    let p16 = document.createElement("div");
+    let p17 = document.createElement("div");
+    p11.className = "platform1_lvl5";
+    p11.dataset.on = "true";
+    p12.className = "platform2_lvl5";
+    p12.dataset.on = "true";
+    p13.className = "platform3_lvl5";
+    p13.dataset.on = "true";
+    p14.className = "platform4_lvl5";
+    p14.dataset.on = "true";
+    p15.className = "platform5_lvl5";
+    p15.dataset.on = "true";
+    p16.className = "platform6_lvl5";
+    p16.dataset.on = "false";
+    p17.className = "platform7_lvl5";
+    p17.dataset.on = "false";
+    map.appendChild(p11);
+    map.appendChild(p12);
+    map.appendChild(p13);
+    map.appendChild(p14);
+    map.appendChild(p15);
+    map.appendChild(p16);
+    map.appendChild(p17);
+    playerSpawnX = 250;
+    playerSpawnY = 500;
   }
   character.x = playerSpawnX;
   character.y = playerSpawnY;
@@ -413,6 +482,8 @@ function spawnMap() {
 
 
 function gameLoop() {
+  if (!isTabActive) return;
+
   ctx.clearRect(0, 0, canvas.width, canvas.height); // képernyő törlése
   ctx.drawImage(
     characterImage,
