@@ -14,7 +14,7 @@ window.addEventListener("resize", function () {
 });
 
 const characterImage = new Image(); // karakter kép
-characterImage.src = "img/character-jobb.png";
+characterImage.src = "img/character_vegleges_jobb.png";
 characterImage.addEventListener("error", function () {
   console.error("Error"); // ha hiba van
 });
@@ -22,14 +22,14 @@ characterImage.addEventListener("error", function () {
 const character = {
   x: 0,
   y: 0,
-  width: 80,
-  height: 130,
+  width: 100,
+  height: 120,
   jumping: false,
-  jumpHeight: 300,
+  jumpHeight: 250,
   jumpCount: 0,
   jumpSpeed: 1500,
   fallSpeed: 1000,
-  speed: 1000,
+  speed: 750,
   velocityX: 0,
   gravity: 0.5,
   velocityY: 0,
@@ -124,10 +124,10 @@ function updateCharacter() {
 
   if (keys["a"]) {
     character.velocityX = -character.speed * dt; // balra mozgás
-    characterImage.src = "img/character-bal.png"; // karakter képének cseréje
+    characterImage.src = "img/character_vegleges_bal.png"; // karakter képének cseréje
   } else if (keys["d"]) {
     character.velocityX = character.speed * dt; // jobbra mozgás
-    characterImage.src = "img/character-jobb.png"; // karakter képének cseréje
+    characterImage.src = "img/character_vegleges_jobb.png"; // karakter képének cseréje
   } else {
     character.velocityX = 0; // ha nem nyomjuk a gombot, akkor nem mozog
   }
@@ -145,6 +145,45 @@ function updateCharacter() {
     }
   } else if (character.y < canvas.height - character.height) {
     character.y += character.fallSpeed * dt; // ha a karakter a levegőben van, akkor lefelé mozog
+  }
+}
+
+function characterMovingAnimation() {
+  if(keys["a"]){
+    let toggle = false;
+    let IntervalId = setInterval(() => {
+      if(toggle){
+        characterImage.src = "img/character_vegleges_ballab_bal.png";
+      } else{
+        characterImage.src = "img/character_vegleges_jobblab_bal.png";
+      }
+      toggle = !toggle;
+    }, 10);
+
+    window.addEventListener("keyup", function(e){
+      if(e.key == "a"){
+        clearInterval(IntervalId);
+        characterImage.src = "img/character_vegleges_bal.png";
+      }
+    })
+  }
+
+  if(keys["d"]){
+    let toggle = false;
+    let intervalId = setInterval(() => {
+      if(toggle){
+        characterImage.src = "img/character_vegleges_jobblab_jobb.png";
+      } else{
+        characterImage.src = "img/character_vegleges_ballab_jobb.png";
+      }
+      toggle = !toggle;
+    }, 10);
+    window.addEventListener("keyup", function(e){
+      if(e.key == "d"){
+        clearInterval(intervalId);
+        characterImage.src = "img/character_vegleges_jobb.png";
+      }
+    })
   }
 }
 
@@ -396,6 +435,8 @@ function gameLoop() {
   goalReached();
 
   BottomPlatformCollision();
+
+  characterMovingAnimation();
 
   StartAgain(); // újrakezdés
 
