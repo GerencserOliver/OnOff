@@ -42,6 +42,8 @@ function collisionDetection() {
     character.x = 0; // ha a karakter bal széle kimegy a képernyőről, akkor visszahúzzuk
   } else if (character.x > canvas.width - character.width) {
     character.x = canvas.width - character.width; // ha a karakter jobb széle kimegy a képernyőről, akkor visszahúzzuk
+  } else if (character.y < 0) {
+    character.y = 0; // ha a karakter teteje kimegy a képernyőről, akkor visszahúzzuk
   }
 }
 
@@ -251,19 +253,6 @@ function characterStandingOnPlatform() {
       character.y = platform.offsetTop - character.height;
       character.jumping = false;
     }
-
-    if (
-      character.x + character.width > platform.offsetLeft &&
-      character.x < platform.offsetLeft + platform.offsetWidth &&
-      character.y + character.height > platform.offsetTop &&
-      character.y < platform.offsetTop + platform.offsetHeight
-    ) {
-      if (keys["a"]) {
-        character.x = platform.offsetLeft + platform.offsetWidth;
-      } else if (keys["d"]) {
-        character.x = platform.offsetLeft - character.width;
-      }
-    }
   }
 }
 
@@ -286,7 +275,33 @@ function BottomPlatformCollision() {
       }
     }
   }
+}
 
+function sidePlatformCollision(){
+  for(var i = 0; i < platforms.length; i++){
+    var platform = platforms[i];
+
+    if(isColorSwitched){
+      if(platform.dataset.on == "true") continue;
+    } else{
+      if(platform.dataset.on == "false") continue;
+    }
+
+    if (
+      character.x + character.width > platform.offsetLeft &&
+      character.x < platform.offsetLeft + platform.offsetWidth &&
+      character.y + character.height > platform.offsetTop &&
+      character.y < platform.offsetTop + platform.offsetHeight
+    ) {
+      if (character.x < platform.offsetLeft) {
+        // A karakter bal oldala érinti a platform jobb oldalát
+        character.x = platform.offsetLeft - character.width; 
+      } else if (character.x + character.width > platform.offsetLeft + platform.offsetWidth) {
+        // A karakter jobb oldala érinti a platform bal oldalát
+        character.x = platform.offsetLeft + platform.offsetWidth;
+      }
+    }
+  }
 }
 
 let isTabActive = true;
@@ -506,6 +521,8 @@ function gameLoop() {
   goalReached();
 
   BottomPlatformCollision();
+
+  sidePlatformCollision();
 
   characterMovingAnimation();
 
