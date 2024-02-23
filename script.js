@@ -93,6 +93,10 @@ let platform23 = document.querySelector(".platform6_lvl6");
 let platform24 = document.querySelector(".platform7_lvl6");
 let platform25 = document.querySelector(".platform8_lvl6");
 let platform26 = document.querySelector(".platform9_lvl6");
+let platform27 = document.querySelector(".platform1_lvl7");
+let platform28 = document.querySelector(".platform2_lvl7");
+let platform29 = document.querySelector(".platform3_lvl7");
+let platform30 = document.querySelector(".platform4_lvl7");
 
 var platforms = [];
 
@@ -149,7 +153,11 @@ function updateCharacter() {
     keys["w"] && lvl == 6 && character.y == platform23.offsetTop - character.height ||
     keys["w"] && lvl == 6 && character.y == platform24.offsetTop - character.height ||
     keys["w"] && lvl == 6 && character.y == platform25.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform26.offsetTop - character.height
+    keys["w"] && lvl == 6 && character.y == platform26.offsetTop - character.height ||
+    keys["w"] && lvl == 7 && character.y == platform27.offsetTop - character.height ||
+    keys["w"] && lvl == 7 && character.y == platform28.offsetTop - character.height ||
+    keys["w"] && lvl == 7 && character.y == platform29.offsetTop - character.height ||
+    keys["w"] && lvl == 7 && character.y == platform30.offsetTop - character.height
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
@@ -248,6 +256,10 @@ function characterStandingOnPlatform() {
   platform24 = document.querySelector(".platform7_lvl6");
   platform25 = document.querySelector(".platform8_lvl6");
   platform26 = document.querySelector(".platform9_lvl6");
+  platform27 = document.querySelector(".platform1_lvl7");
+  platform28 = document.querySelector(".platform2_lvl7");
+  platform29 = document.querySelector(".platform3_lvl7");
+  platform30 = document.querySelector(".platform4_lvl7");
   
 
   if (lvl == 1) {
@@ -262,6 +274,8 @@ function characterStandingOnPlatform() {
     platforms = [platform11, platform12, platform13, platform14, platform15, platform16, platform17];
   } else if (lvl == 6){
     platforms = [platform18, platform19, platform20, platform21, platform22, platform23, platform24, platform25, platform26];
+  } else if (lvl == 7) {
+    platforms = [platform27, platform28, platform29, platform30];
   }
 
   for (var i = 0; i < platforms.length; i++) {
@@ -388,6 +402,7 @@ function goalReached() {
   const goal4 = document.querySelector(".goal4");
   const goal5 = document.querySelector(".goal5");
   const goal6 = document.querySelector(".goal6");
+  const goal7 = document.querySelector(".goal7");
   
   if(lvl == 1){
     goals = [goal1];
@@ -401,6 +416,8 @@ function goalReached() {
     goals = [goal5];
   } else if(lvl == 6){
     goals = [goal6];
+  } else if(lvl == 7){
+    goals = [goal7];
   }
 
   for (var i = 0; i < goals.length; i++) {
@@ -562,6 +579,25 @@ function spawnMap() {
     map.appendChild(p26);
     playerSpawnX = 250;
     playerSpawnY = 500;
+  } else if (lvl == 7){
+    let p27 = document.createElement("div");
+    let p28 = document.createElement("div");
+    let p29 = document.createElement("div");
+    let p30 = document.createElement("div");
+    p27.className = "platform1_lvl7";
+    p27.dataset.on = "false";
+    p28.className = "platform2_lvl7";
+    p28.dataset.on = "true";
+    p29.className = "platform3_lvl7";
+    p29.dataset.on = "true";
+    p30.className = "platform4_lvl7";
+    p30.dataset.on = "false";
+    map.appendChild(p27);
+    map.appendChild(p28);
+    map.appendChild(p29);
+    map.appendChild(p30);
+    playerSpawnX = 200;
+    playerSpawnY = 0;
   }
   character.x = playerSpawnX;
   character.y = playerSpawnY;

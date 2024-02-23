@@ -428,6 +428,55 @@ img {
   animation: pulse 2s infinite;
 }
 
+.platform1_lvl7 {
+  top: 800px;
+  left: 90px;
+  width: 450px;
+  height: 180px;
+  position: absolute;
+  background-color: #3b3b3b;
+  z-index: -1;
+}
+
+.platform2_lvl7 {
+  top: 610px;
+  left: 640px;
+  width: 130px;
+  height: 392px;
+  position: absolute;
+  background-color:rgb(214, 214, 214);
+  z-index: -1;
+}
+
+.platform3_lvl7 {
+  top: 440px;
+  left: 880px;
+  width: 130px;
+  height: 500px;
+  position: absolute;
+  background-color:rgb(214, 214, 214);
+  z-index: -1;
+}
+
+.platform4_lvl7 {
+  top: 240px;
+  left: 1100px;
+  width: 450px;
+  height:800px;
+  position: absolute;
+  background-color: #3b3b3b;
+  z-index: -1;
+}
+
+.goal7 {
+  top: 150px;
+  left: 1280px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: pulse 2s infinite;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(0.8);
