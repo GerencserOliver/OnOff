@@ -27,9 +27,9 @@ const character = {
   jumping: false,
   jumpHeight: 250,
   jumpCount: 0,
-  jumpSpeed: 1500,
+  jumpSpeed: 1100,
   fallSpeed: 1000,
-  speed: 750,
+  speed: 650,
   velocityX: 0,
   gravity: 0.5,
   velocityY: 0,
@@ -84,6 +84,15 @@ let platform14 = document.querySelector(".platform4_lvl5");
 let platform15 = document.querySelector(".platform5_lvl5");
 let platform16 = document.querySelector(".platform6_lvl5");
 let platform17 = document.querySelector(".platform7_lvl5");
+let platform18 = document.querySelector(".platform1_lvl6");
+let platform19 = document.querySelector(".platform2_lvl6");
+let platform20 = document.querySelector(".platform3_lvl6");
+let platform21 = document.querySelector(".platform4_lvl6");
+let platform22 = document.querySelector(".platform5_lvl6");
+let platform23 = document.querySelector(".platform6_lvl6");
+let platform24 = document.querySelector(".platform7_lvl6");
+let platform25 = document.querySelector(".platform8_lvl6");
+let platform26 = document.querySelector(".platform9_lvl6");
 
 var platforms = [];
 
@@ -131,7 +140,16 @@ function updateCharacter() {
     keys["w"] && lvl == 5 && character.y == platform14.offsetTop - character.height ||
     keys["w"] && lvl == 5 && character.y == platform15.offsetTop - character.height ||
     keys["w"] && lvl == 5 && character.y == platform16.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform17.offsetTop - character.height
+    keys["w"] && lvl == 5 && character.y == platform17.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform18.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform19.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform20.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform21.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform22.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform23.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform24.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform25.offsetTop - character.height ||
+    keys["w"] && lvl == 6 && character.y == platform26.offsetTop - character.height
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
@@ -221,6 +239,16 @@ function characterStandingOnPlatform() {
   platform15 = document.querySelector(".platform5_lvl5");
   platform16 = document.querySelector(".platform6_lvl5");
   platform17 = document.querySelector(".platform7_lvl5");
+  platform18 = document.querySelector(".platform1_lvl6");
+  platform19 = document.querySelector(".platform2_lvl6");
+  platform20 = document.querySelector(".platform3_lvl6");
+  platform21 = document.querySelector(".platform4_lvl6");
+  platform22 = document.querySelector(".platform5_lvl6");
+  platform23 = document.querySelector(".platform6_lvl6");
+  platform24 = document.querySelector(".platform7_lvl6");
+  platform25 = document.querySelector(".platform8_lvl6");
+  platform26 = document.querySelector(".platform9_lvl6");
+  
 
   if (lvl == 1) {
     platforms = [platform1, platform2];
@@ -232,6 +260,8 @@ function characterStandingOnPlatform() {
     platforms = [platform8, platform9, platform10];
   } else if (lvl == 5){
     platforms = [platform11, platform12, platform13, platform14, platform15, platform16, platform17];
+  } else if (lvl == 6){
+    platforms = [platform18, platform19, platform20, platform21, platform22, platform23, platform24, platform25, platform26];
   }
 
   for (var i = 0; i < platforms.length; i++) {
@@ -356,6 +386,8 @@ function goalReached() {
   const goal2 = document.querySelector(".goal2");
   const goal3 = document.querySelector(".goal3");
   const goal4 = document.querySelector(".goal4");
+  const goal5 = document.querySelector(".goal5");
+  const goal6 = document.querySelector(".goal6");
   
   if(lvl == 1){
     goals = [goal1];
@@ -365,6 +397,10 @@ function goalReached() {
     goals = [goal3];
   } else if(lvl == 4){
     goals = [goal4];
+  } else if(lvl == 5){
+    goals = [goal5];
+  } else if(lvl == 6){
+    goals = [goal6];
   }
 
   for (var i = 0; i < goals.length; i++) {
@@ -439,7 +475,7 @@ function spawnMap() {
     goal3.className = "goal3";
     map.appendChild(p6);
     map.appendChild(p7);
-    playerSpawnX = 200;
+    playerSpawnX = 240;
     playerSpawnY = 0;
   } else if (lvl == 4){
     let p8 = document.createElement("div");
@@ -485,6 +521,45 @@ function spawnMap() {
     map.appendChild(p15);
     map.appendChild(p16);
     map.appendChild(p17);
+    playerSpawnX = 250;
+    playerSpawnY = 500;
+  } else if (lvl == 6){
+    let p18 = document.createElement("div");
+    let p19 = document.createElement("div");
+    let p20 = document.createElement("div");
+    let p21 = document.createElement("div");
+    let p22 = document.createElement("div");
+    let p23 = document.createElement("div");
+    let p24 = document.createElement("div");
+    let p25 = document.createElement("div");
+    let p26 = document.createElement("div");
+    p18.className = "platform1_lvl6";
+    p18.dataset.on = "true";
+    p19.className = "platform2_lvl6";
+    p19.dataset.on = "true";
+    p20.className = "platform3_lvl6";
+    p20.dataset.on = "true";
+    p21.className = "platform4_lvl6";
+    p21.dataset.on = "true";
+    p22.className = "platform5_lvl6";
+    p22.dataset.on = "true";
+    p23.className = "platform6_lvl6";
+    p23.dataset.on = "true";
+    p24.className = "platform7_lvl6";
+    p24.dataset.on = "true";
+    p25.className = "platform8_lvl6";
+    p25.dataset.on = "true";
+    p26.className = "platform9_lvl6";
+    p26.dataset.on = "true";
+    map.appendChild(p18);
+    map.appendChild(p19);
+    map.appendChild(p20);
+    map.appendChild(p21);
+    map.appendChild(p22);
+    map.appendChild(p23);
+    map.appendChild(p24);
+    map.appendChild(p25);
+    map.appendChild(p26);
     playerSpawnX = 250;
     playerSpawnY = 500;
   }
