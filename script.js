@@ -360,20 +360,23 @@ document.addEventListener("visibilitychange", function() {
   }
 });
 
+const goal7 = document.querySelector(".goal7");
 
 function winAnimation() {
-  if (goalReached) {
-    document.body.innerHTML = "";
-    document.body.style.backgroundColor = "#3b3b3b";
-    const win = document.createElement("h1");
-    win.innerHTML = "You won!";
-    win.style.color = "white";
-    win.style.textAlign = "center";
-    win.style.fontSize = "100px";
-    win.style.marginTop = "50vh";
-    document.body.appendChild(win);
-    setTimeout(() => {
-    }, 1000);
+  document.body.innerHTML = "";
+  document.body.style.backgroundColor = "#3b3b3b";
+  const win = document.createElement("h1");
+  win.innerHTML = "Thank you for playing!";
+  win.style.color = "white";
+  win.style.textAlign = "center";
+  win.style.fontSize = "100px";
+  win.style.marginTop = "40vh";
+  document.body.appendChild(win);
+}
+
+function finalLevel() {
+  if (lvl == 8) {
+    winAnimation();
   }
 }
 
@@ -598,6 +601,8 @@ function spawnMap() {
     map.appendChild(p30);
     playerSpawnX = 200;
     playerSpawnY = 0;
+  } else if (lvl == 8){
+    finalLevel();
   }
   character.x = playerSpawnX;
   character.y = playerSpawnY;
@@ -638,6 +643,8 @@ function gameLoop() {
   characterMovingAnimation();
 
   StartAgain(); // újrakezdés
+
+  finalLevel()
 
   setTimeout(gameLoop, 1000 / 60); // 60 fps
 }
