@@ -82,6 +82,26 @@ function characterOnGround() {
 
 const keys = {};
 
+let defaultControls = { up: 'w', left: 'a', right: 'd' };
+
+let upInput = document.getElementById('up');
+let leftInput = document.getElementById('left');
+let rightInput = document.getElementById('right');
+
+document.addEventListener("keydown", function (event) {
+  keys[event.key] = true;
+
+  if (event.key === 'w' || event.key === 'a' || event.key === 'd') {
+    localStorage.setItem("defControl" + event.key.toUpperCase(), event.key);
+  }
+});
+
+document.addEventListener("keyup", function (event) {
+  keys[event.key] = false;
+});
+
+console.log(defaultControls)
+
 let isColorSwitched = false;
 let playerInterval = null;
 
@@ -149,51 +169,51 @@ function updateCharacter() {
   var now = Date.now();
   var dt = (now - lastUpdate) / 1000;
   lastUpdate = now;
-  let up = localStorage.getItem("defControlUp")
-  let right = localStorage.getItem("defControlRight")
-  let left = localStorage.getItem("defControlLeft")
+  let up = localStorage.getItem("defControlW") || defaultControls.up;
+  let right = localStorage.getItem("defControlD") || defaultControls.right;
+  let left = localStorage.getItem("defControlA") || defaultControls.left;
 
   if (
-    keys["w"] && lvl == 1 && character.y == platform1.offsetTop - character.height ||
-    keys["w"] && lvl == 1 && character.y == platform2.offsetTop - character.height ||
-    keys["w"] && lvl == 2 && character.y == platform3.offsetTop - character.height ||
-    keys["w"] && lvl == 2 && character.y == platform4.offsetTop - character.height ||
-    keys["w"] && lvl == 2 && character.y == platform5.offsetTop - character.height ||
-    keys["w"] && lvl == 3 && character.y == platform6.offsetTop - character.height ||
-    keys["w"] && lvl == 3 && character.y == platform7.offsetTop - character.height ||
-    keys["w"] && lvl == 4 && character.y == platform8.offsetTop - character.height ||
-    keys["w"] && lvl == 4 && character.y == platform9.offsetTop - character.height ||
-    keys["w"] && lvl == 4 && character.y == platform10.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform11.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform12.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform13.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform14.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform15.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform16.offsetTop - character.height ||
-    keys["w"] && lvl == 5 && character.y == platform17.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform18.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform19.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform20.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform21.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform22.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform23.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform24.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform25.offsetTop - character.height ||
-    keys["w"] && lvl == 6 && character.y == platform26.offsetTop - character.height ||
-    keys["w"] && lvl == 7 && character.y == platform27.offsetTop - character.height ||
-    keys["w"] && lvl == 7 && character.y == platform28.offsetTop - character.height ||
-    keys["w"] && lvl == 7 && character.y == platform29.offsetTop - character.height ||
-    keys["w"] && lvl == 7 && character.y == platform30.offsetTop - character.height
+    keys[up] && lvl == 1 && character.y == platform1.offsetTop - character.height ||
+    keys[up] && lvl == 1 && character.y == platform2.offsetTop - character.height ||
+    keys[up] && lvl == 2 && character.y == platform3.offsetTop - character.height ||
+    keys[up] && lvl == 2 && character.y == platform4.offsetTop - character.height ||
+    keys[up] && lvl == 2 && character.y == platform5.offsetTop - character.height ||
+    keys[up] && lvl == 3 && character.y == platform6.offsetTop - character.height ||
+    keys[up] && lvl == 3 && character.y == platform7.offsetTop - character.height ||
+    keys[up] && lvl == 4 && character.y == platform8.offsetTop - character.height ||
+    keys[up] && lvl == 4 && character.y == platform9.offsetTop - character.height ||
+    keys[up] && lvl == 4 && character.y == platform10.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform11.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform12.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform13.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform14.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform15.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform16.offsetTop - character.height ||
+    keys[up] && lvl == 5 && character.y == platform17.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform18.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform19.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform20.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform21.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform22.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform23.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform24.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform25.offsetTop - character.height ||
+    keys[up] && lvl == 6 && character.y == platform26.offsetTop - character.height ||
+    keys[up] && lvl == 7 && character.y == platform27.offsetTop - character.height ||
+    keys[up] && lvl == 7 && character.y == platform28.offsetTop - character.height ||
+    keys[up] && lvl == 7 && character.y == platform29.offsetTop - character.height ||
+    keys[up] && lvl == 7 && character.y == platform30.offsetTop - character.height
   ) {
     character.jumping = true; // ugrás
     character.velocityY = -character.jumpSpeed * dt; // függőleges sebesség
     character.jumpCount = 0; // ugrás számláló
   }
 
-  if (keys["a"]) {
+  if (keys[left]) {
     character.velocityX = -character.speed * dt; // balra mozgás
     characterImage.src = "img/character_vegleges_bal.png"; // karakter képének cseréje
-  } else if (keys["d"]) {
+  } else if (keys[right]) {
     character.velocityX = character.speed * dt; // jobbra mozgás
     characterImage.src = "img/character_vegleges_jobb.png"; // karakter képének cseréje
   } else {
@@ -673,6 +693,6 @@ function gameLoop() {
   finalLevel()
 
   setTimeout(gameLoop, 1000 / 60); // 60 fps
-}
 
+}
 gameLoop();
