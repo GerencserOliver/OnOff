@@ -20,8 +20,8 @@ characterImage.addEventListener("error", function () {
 });
 
 const character = {
-  x: 0,
-  y: 0,
+  x: 250,
+  y: 450,
   width: 100,
   height: 120,
   jumping: false,
