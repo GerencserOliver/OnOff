@@ -98,7 +98,7 @@ img {
 .platform1 {
   top: 550px;
   left: 255px;
-  width: 600px;
+  width: 510px;
   height: 5000px;
   position: absolute;
   background-color: #3b3b3b;
@@ -108,7 +108,7 @@ img {
 .platform2 {
   top: 550px;
   left: 1065px;
-  width: 600px;
+  width: 510px;
   height: 5000px;
   position: absolute;
   background-color: #3b3b3b;
@@ -117,7 +117,7 @@ img {
 
 .goal1 {
   top: 450px;
-  left: 1550px;
+  left: 1470px;
   width: 100px;
   height: 100px;
   position: absolute;
@@ -224,7 +224,7 @@ img {
 
 .platform2_lvl4 {
   top: 550px;
-  left: 800px;
+  left: 730px;
   width: 300px;
   height: 5000px;
   position: absolute;
@@ -234,7 +234,7 @@ img {
 
 .platform3_lvl4 {
   top: 550px;
-  left: 1400px;
+  left: 1260px;
   width: 300px;
   height: 5000px;
   position: absolute;
@@ -244,7 +244,7 @@ img {
 
 .goal4 {
   top: 450px;
-  left: 1600px;
+  left: 1450px;
   width: 100px;
   height: 100px;
   position: absolute;
@@ -400,10 +400,10 @@ img {
 }
 
 .platform8_lvl6 {
-  top: 380px;
+  top: 580px;
   left: 1325px;
-  width: 140px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
   position: absolute;
   background-color: #3b3b3b;
   z-index: -1;
@@ -470,7 +470,7 @@ img {
 
 .goal7 {
   top: 150px;
-  left: 1280px;
+  left: 1400px;
   width: 100px;
   height: 100px;
   position: absolute;

@@ -1,6 +1,6 @@
 let lvl = 1;
-let playerSpawnX = 0;
-let playerSpawnY = 0;
+let playerSpawnX = 250;
+let playerSpawnY = 450;
 const canvas = document.createElement("canvas"); // rajzolás
 const ctx = canvas.getContext("2d");
 document.body.appendChild(canvas); // megjelenítés
@@ -25,9 +25,9 @@ const character = {
   width: 100,
   height: 120,
   jumping: false,
-  jumpHeight: 250,
+  jumpHeight: 220,
   jumpCount: 0,
-  jumpSpeed: 1100,
+  jumpSpeed: 1200,
   fallSpeed: 1000,
   speed: 650,
   velocityX: 0,
@@ -45,6 +45,32 @@ function collisionDetection() {
   } else if (character.y < 0) {
     character.y = 0; // ha a karakter teteje kimegy a képernyőről, akkor visszahúzzuk
   }
+}
+
+const jumpControlImage = "img/control(ugrás).png";
+const leftControlImage = "img/control(bal).png";
+const rightControlImage = "img/control(jobb).png";
+const colorChangeControlImage = "img/control(színcsere).png";
+const defaultControlImage = "img/ideiglenes-control.png";
+
+function loadJumpImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = jumpControlImage;
+}
+
+function loadLeftImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = leftControlImage;
+}
+
+function loadRightImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = rightControlImage;
+}
+
+function loadColorChangeImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = colorChangeControlImage;
+}
+
+function loadDefaultImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = defaultControlImage;
 }
 
 // ne lógjon le a karakter a képernyő aljáról
@@ -91,32 +117,6 @@ let platform29 = document.querySelector(".platform3_lvl7");
 let platform30 = document.querySelector(".platform4_lvl7");
 
 var platforms = [];
-
-const jumpControlImage = "img/control(ugrás).png";
-const leftControlImage = "img/control(bal).png";
-const rightControlImage = "img/control(jobb).png";
-const colorChangeControlImage = "img/control(színcsere).png";
-const defaultControlImage = "img/ideiglenes-control.png";
-
-function loadJumpImage() {
-  document.getElementById("control_img").getElementsByTagName("img")[0].src = jumpControlImage;
-}
-
-function loadLeftImage() {
-  document.getElementById("control_img").getElementsByTagName("img")[0].src = leftControlImage;
-}
-
-function loadRightImage() {
-  document.getElementById("control_img").getElementsByTagName("img")[0].src = rightControlImage;
-}
-
-function loadColorChangeImage() {
-  document.getElementById("control_img").getElementsByTagName("img")[0].src = colorChangeControlImage;
-}
-
-function loadDefaultImage() {
-  document.getElementById("control_img").getElementsByTagName("img")[0].src = defaultControlImage;
-}
 
 document.addEventListener("keydown", function (event) {
   // ha lenyomjuk a space-t akkor a platformok színe változik
@@ -614,13 +614,13 @@ function spawnMap() {
     let p29 = document.createElement("div");
     let p30 = document.createElement("div");
     p27.className = "platform1_lvl7";
-    p27.dataset.on = "false";
+    p27.dataset.on = "true";
     p28.className = "platform2_lvl7";
-    p28.dataset.on = "true";
+    p28.dataset.on = "false";
     p29.className = "platform3_lvl7";
-    p29.dataset.on = "true";
+    p29.dataset.on = "false";
     p30.className = "platform4_lvl7";
-    p30.dataset.on = "false";
+    p30.dataset.on = "true";
     map.appendChild(p27);
     map.appendChild(p28);
     map.appendChild(p29);
