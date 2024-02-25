@@ -9,8 +9,12 @@
 </head>
 
 <body>
-    <div>
+    <div id="control_img">
         <img src="img/ideiglenes-control.png" alt="">
+        <input type="text" placeholder="w" maxlength="1" size="1" id="up" onclick="loadJumpImage()" onblur="loadDefaultImage()">
+        <input type="text" placeholder="a" maxlength="1" size="1" id="left" onclick="loadLeftImage()" onblur="loadDefaultImage()">
+        <input type="text" placeholder="d" maxlength="1" size="1" id="right" onclick="loadRightImage()" onblur="loadDefaultImage()">
+        <input type="text" placeholder="SPACE" maxlength="5" size="1" id="color_change" onclick="loadColorChangeImage()" onblur="loadDefaultImage()">
     </div>
     <button class="btn-back"><a href="index.html">BACK TO MENU</a></button>
 </body>

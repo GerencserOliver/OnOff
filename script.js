@@ -100,6 +100,32 @@ let platform30 = document.querySelector(".platform4_lvl7");
 
 var platforms = [];
 
+const jumpControlImage = "img/control(ugrás).png";
+const leftControlImage = "img/control(bal).png";
+const rightControlImage = "img/control(jobb).png";
+const colorChangeControlImage = "img/control(színcsere).png";
+const defaultControlImage = "img/ideiglenes-control.png";
+
+function loadJumpImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = jumpControlImage;
+}
+
+function loadLeftImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = leftControlImage;
+}
+
+function loadRightImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = rightControlImage;
+}
+
+function loadColorChangeImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = colorChangeControlImage;
+}
+
+function loadDefaultImage() {
+  document.getElementById("control_img").getElementsByTagName("img")[0].src = defaultControlImage;
+}
+
 document.addEventListener("keydown", function (event) {
   // ha lenyomjuk a space-t akkor a platformok színe változik
   if (event.code == "Space") {

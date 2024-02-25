@@ -490,3 +490,46 @@ img {
     transform: scale(0.8);
   }
 }
+
+#up{
+  background-color: white;
+  position: absolute;
+  left: 34%;
+  top: 42.1%;
+  width: 45px;
+  height: 45px;
+}
+
+#right{
+  background-color: white;
+  position: absolute;
+  left: 38.44%;
+  top: 49.79%;
+  width: 45px;
+  height: 45px;
+}
+
+#left{
+  background-color: white;
+  position: absolute;
+  left: 29.62%;
+  top: 49.80%;
+  width: 45px;
+  height: 45px;
+}
+
+#color_change{
+  background-color:white;
+  position: absolute;
+  left: 58%;
+  top: 49.94%;
+  width: 232px;
+  height: 44px;
+}
+
+input[type="text"]
+{
+    font-size:40px;
+    width: 42px;
+    text-align: center;
+}
