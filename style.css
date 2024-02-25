@@ -494,8 +494,8 @@ img {
 #up{
   background-color: white;
   position: absolute;
-  left: 34%;
-  top: 42.1%;
+  left: 33.66%;
+  top: 41.7%;
   width: 45px;
   height: 45px;
 }
@@ -503,8 +503,8 @@ img {
 #right{
   background-color: white;
   position: absolute;
-  left: 38.44%;
-  top: 49.79%;
+  left: 38.1%;
+  top: 49.49%;
   width: 45px;
   height: 45px;
 }
@@ -512,8 +512,8 @@ img {
 #left{
   background-color: white;
   position: absolute;
-  left: 29.62%;
-  top: 49.80%;
+  left: 29.3%;
+  top: 49.49%;
   width: 45px;
   height: 45px;
 }
@@ -521,8 +521,8 @@ img {
 #color_change{
   background-color:white;
   position: absolute;
-  left: 58%;
-  top: 49.94%;
+  left: 57.68%;
+  top: 49.44%;
   width: 232px;
   height: 44px;
 }

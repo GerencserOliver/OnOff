@@ -56,14 +56,6 @@ function characterOnGround() {
 
 const keys = {};
 
-document.addEventListener("keydown", function (event) {
-  keys[event.key] = true; // ha lenyomjuk a gombot
-});
-
-document.addEventListener("keyup", function (event) {
-  keys[event.key] = false; // ha felengedjük a gombot
-});
-
 let isColorSwitched = false;
 let playerInterval = null;
 
@@ -128,6 +120,7 @@ function loadDefaultImage() {
 
 document.addEventListener("keydown", function (event) {
   // ha lenyomjuk a space-t akkor a platformok színe változik
+  keys[event.key] = true;
   if (event.code == "Space") {
     if (isColorSwitched) {
       platforms.forEach(platform => {
@@ -146,12 +139,19 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+document.addEventListener("keyup", function (event) {
+  keys[event.key] = false; // ha felengedjük a gombot
+});
+
 var lastUpdate = Date.now();
 
 function updateCharacter() {
   var now = Date.now();
   var dt = (now - lastUpdate) / 1000;
   lastUpdate = now;
+  let up = localStorage.getItem("defControlUp")
+  let right = localStorage.getItem("defControlRight")
+  let left = localStorage.getItem("defControlLeft")
 
   if (
     keys["w"] && lvl == 1 && character.y == platform1.offsetTop - character.height ||
